@@ -1,0 +1,6 @@
+# Diretorios
+/vendor
+.idea
+
+# Arquivos
+.env

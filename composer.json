@@ -1,0 +1,20 @@
+{
+    "name": "pedro/sked-eventos",
+    "description": "Plataforma de eventos.",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pedro\\SkedEventos\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pedro Gabriel",
+            "email": "63373521+PedroGXV@users.noreply.github.com"
+        }
+    ]
+}
