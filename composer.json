@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pedro\\SkedEventos\\": "src/"
+            "App\\": "App/"
         }
     },
     "authors": [
