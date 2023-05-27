@@ -1,0 +1,29 @@
+<?php
+
+namespace App;
+
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+final class View
+{
+    private FilesystemLoader $loader;
+    private Environment $twig;
+
+    public function __construct()
+    {
+        // Configuração do Twig
+        $this->loader = new FilesystemLoader(dirname(__DIR__) . "\\views");
+        $this->twig = new Environment($this->loader, [
+            'cache' => 'cache',
+            'auto_reload' => true,
+        ]);
+    }
+
+    public function render(string $view_path, array $data = []): View
+    {
+        echo $this->twig->render($view_path, $data);
+
+        return $this;
+    }
+}
