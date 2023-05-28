@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Contracts\Controller;
 use App\View;
 
-class EventoController extends Controller
+class EventoController implements Controller
 {
     public function get(): View
     {

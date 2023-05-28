@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Controllers\Controller;
+use App\Contracts\Controller;
 use ReflectionClass;
 
 final class RouteLoader
