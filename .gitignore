@@ -1,6 +1,7 @@
 # Diretorios
 /vendor
 .idea
+/cache
 
 # Arquivos
 .env
