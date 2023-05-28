@@ -3,4 +3,5 @@
 use App\RouteLoader;
 use App\Controllers\EventoController;
 
-RouteLoader::register('/', (new EventoController()));
+RouteLoader::registerSingleAction('GET', '/', new EventoController(), 'get');
+RouteLoader::register('/eventos', (new EventoController()));
