@@ -16,9 +16,11 @@ class EventoController implements Controller
             ->render("eventos/index.html", ['eventos' => $eventos]);
     }
 
-    public function post(): void
+    public function post(): never
     {
-        echo "POST";
-        // TODO: Implement post() method.
+        (new Evento())->save($_POST);
+        var_dump($_POST);
+//        header("Location: /eventos");
+        die();
     }
 }

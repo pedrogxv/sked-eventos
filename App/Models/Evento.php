@@ -8,7 +8,14 @@ class Evento extends Model
 {
     public string $name = 'eventos';
 
-    protected array $attributes = [
-        'id' ,'titulo', 'descricao', 'inicio', 'termino', 'updated_at', 'created_at', 'deleted_at'
+    protected array $fillable = [
+        'titulo', 'descricao', 'inicio', 'termino',
+    ];
+
+    protected array $rules = [
+        'titulo' => ["string", "min:5", "required"],
+        'descricao' => ["string"],
+        'inicio' => ["datetime", "required"],
+        'termino' => ["datetime", "required"],
     ];
 }

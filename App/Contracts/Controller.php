@@ -7,5 +7,5 @@ use App\View;
 interface Controller
 {
     public function get(): View;
-    public function post(): void;
+    public function post(): never;
 }
