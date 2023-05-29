@@ -5,9 +5,11 @@
     <title>SKED Eventos</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-200 flex items-center justify-center my-6">
-  {% block body %}
+<body class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 flex items-center justify-center my-6">
+    <div class="container">
+      {% block body %}
 
-  {% endblock %}
+      {% endblock %}
+    </div>
 </body>
 </html>

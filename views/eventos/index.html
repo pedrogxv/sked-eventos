@@ -1,12 +1,76 @@
 {% extends "layouts/base.html" %}
 
 {% block body %}
-<div class="bg-white rounded-lg shadow-lg p-4 w-5/6">
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 w-full">
     <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 mb-3">
         Novo Evento
     </span>
-    <div class="container">
+</div>
 
-    </div>
+<div class="container mt-4">
+    <table class="rounded border-separate border-spacing-2 w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+        <caption class="caption-top mb-4">
+            Tabela de Eventos
+        </caption>
+        <thead class="bg-slate-50 dark:bg-slate-700">
+        <tr>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">#
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Titulo
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Descrição
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Data de Início
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Data de Término
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Criado em
+            </th>
+            <th class="rounded dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+                Atualizado em
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if eventos is empty %}
+        <tr>
+            <td>
+                <span class="text-center">Nenhum dado encontrado!</span>
+            </td>
+        </tr>
+        {% else %}
+        {% for evento in eventos %}
+        <tr>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.id }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.titulo }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.descricao }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.inicio }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.termino }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.created_at }}
+            </td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                {{ evento.updated_at ?? 'Não atualizado!' }}
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

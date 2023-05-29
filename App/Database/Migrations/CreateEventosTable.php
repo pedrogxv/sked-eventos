@@ -10,6 +10,7 @@ class CreateEventosTable extends Migration
     protected string $model = Evento::class;
 
     protected array $attributes = [
+        'id' => ["bigint", "PRIMARY KEY", "AUTO_INCREMENT"],
         'titulo' => ["varchar(255)", "not null"],
         'descricao' => ["text"],
         'inicio' => ["datetime", "not null"],

@@ -20,6 +20,7 @@ final class View
         ]);
     }
 
+    // renderiza o arquivo solicitado
     public function render(string $view_path, array $data = []): View
     {
         echo $this->twig->render($view_path, $data);
