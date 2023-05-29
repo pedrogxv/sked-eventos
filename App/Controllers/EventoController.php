@@ -18,8 +18,8 @@ class EventoController implements Controller
 
     public function post(): never
     {
-        (new Evento())->save($_POST);
         var_dump($_POST);
+        (new Evento())->save($_POST);
 //        header("Location: /eventos");
         die();
     }

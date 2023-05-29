@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Exceptions\ValidatorException;
+use DateTime;
 use Exception;
 
 /** Esta classe é responsável por validar valores conforme as regras passadas */
@@ -76,6 +77,72 @@ final class Validator
     {
         if ($value !== $this->values[$field_name]) {
             throw new ValidatorException("\"$value\" não corresponde com campo: \"$field_name\"!");
+        }
+
+        return true;
+    }
+
+    /**
+     * Checa se um valor requerido é vazio.
+     * @throws ValidatorException
+     */
+    private function is_required(string $value): bool
+    {
+        if (!$value) {
+            throw new ValidatorException("Campo " . ucfirst($this->current_field) . " não pode ser vazio!");
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Checa se um valor é um DateTime baseado no formato 8601.
+     * @throws ValidatorException
+     */
+    private function is_datetime(string $value): bool
+    {
+        $dateTime = DateTime::createFromFormat('Y-m-d\TH:i', $value);
+
+        if (!$dateTime) {
+            throw new ValidatorException("Campo " . ucfirst($this->current_field) . " não pôde ser validado como um formato de data válido no padrão ISO 8601!");
+        }
+
+        return true;
+    }
+
+    /**
+     * Checa se o valor é uma string.
+     * @throws ValidatorException
+     */
+    private function is_string(mixed $value): bool
+    {
+        if (gettype($value) !== "string") {
+            throw new ValidatorException("Campo " . ucfirst($this->current_field) . " deve ser do tipo string (texto)!");
+        }
+
+        return true;
+    }
+
+    /**
+     * Checa se a data solicitada é depois (maior) que a data comparada.
+     * @throws ValidatorException
+     */
+    private function is_after(string $date, string $comparator): bool
+    {
+        $date = new DateTime($date);
+        $dateCompared = new DateTime(strtotime($comparator));
+
+        // Caso esteja comparando com um valor existente no vetor de valores a serem validados...
+        if (isset($this->values[$comparator])) {
+            $dateCompared = new DateTime($this->values[$comparator]);
+        }
+
+        // Se a data não for maior que a data comparada...
+        if ($date < $dateCompared) {
+            throw new ValidatorException(
+                "Data do campo " . ucfirst($this->current_field) . " deve ser maior que " . ucfirst($comparator) . "!"
+            );
         }
 
         return true;
