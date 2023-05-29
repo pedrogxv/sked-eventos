@@ -15,7 +15,7 @@ class CreateEventosTable extends Migration
         'descricao' => ["text"],
         'inicio' => ["datetime", "not null"],
         'termino' => ["datetime", "not null"],
-        'created_at' => ["datetime", "not null"],
+        'created_at' => ["datetime", "not null", "DEFAULT CURRENT_TIMESTAMP()"],
         'updated_at' => ["datetime"],
         'deleted_at' => ["datetime"],
     ];
