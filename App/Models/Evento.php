@@ -15,7 +15,7 @@ class Evento extends Model
     protected array $rules = [
         'titulo' => ["string", "min:5", "required"],
         'descricao' => ["string"],
-        'inicio' => ["datetime", "after:hoje", "required"],
+        'inicio' => ["datetime", "after:agora", "required"],
         'termino' => ["datetime", "after:inicio", "required"],
     ];
 }

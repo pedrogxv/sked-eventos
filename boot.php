@@ -7,6 +7,9 @@ require_once 'routes/app.php';
 use App\Database\MigrationLoader;
 use App\RouteLoader;
 
+// Definindo timezone padrão para São Paulo
+date_default_timezone_set('America/Sao_Paulo');
+
 // Configuração do Dotenv
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
