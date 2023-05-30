@@ -11,7 +11,7 @@ final class RouteLoader
 
     public static function loadRoute(): never
     {
-        $route_name = $_SERVER['REQUEST_URI'];
+        $route_name = $_SERVER["PATH_INFO"];
         $req_method = $_SERVER['REQUEST_METHOD'];
 
         if (!array_key_exists($route_name, self::$routes)) {
