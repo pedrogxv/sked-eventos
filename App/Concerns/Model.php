@@ -48,7 +48,7 @@ abstract class Model
     {
         // Validando dados.
         try {
-             (new Validator($this->rules, $data))
+            (new Validator($this->rules, $data))
                 ->validate();
         } catch (ValidatorException $e) {
             return throw new $e;
@@ -72,5 +72,16 @@ abstract class Model
         $con = PDOConnector::getConnector()->prepare($query);
 
         return $con->execute();
+    }
+
+    /** Deleta um registro do banco de dados */
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM $this->name WHERE id = $id";
+
+        $statement = PDOConnector::getConnector()
+            ->prepare($sql);
+
+        return $statement->execute();
     }
 }

@@ -32,4 +32,10 @@ class EventoController implements Controller
             die();
         }
     }
+
+    public function delete(): never
+    {
+        (new Evento())->delete($_GET['id']);
+        die();
+    }
 }
