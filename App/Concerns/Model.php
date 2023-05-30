@@ -47,11 +47,12 @@ abstract class Model
     public function save(array $data): bool
     {
         // Validando dados.
-        $isValid = (new Validator($this->rules, $data))
-            ->validate();
-
-        // Caso nos dados sejam inválidos...
-        if (!$isValid) return false;
+        try {
+             (new Validator($this->rules, $data))
+                ->validate();
+        } catch (ValidatorException $e) {
+            return throw new $e;
+        }
 
         $fields = rtrim(
             implode(", ", array_keys($data)), ", "

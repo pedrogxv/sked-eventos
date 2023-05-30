@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Contracts\Controller;
+use App\Exceptions\ValidatorException;
 use App\Models\Evento;
 use App\View;
 
@@ -18,9 +19,17 @@ class EventoController implements Controller
 
     public function post(): never
     {
-        var_dump($_POST);
-        (new Evento())->save($_POST);
-//        header("Location: /eventos");
-        die();
+        try {
+            $salvo = (new Evento())->save($_POST);
+
+            if ($salvo) {
+                header("Location: /eventos");
+                die();
+            }
+        } catch (ValidatorException $e) {
+        } finally {
+            $this->get();
+            die();
+        }
     }
 }
