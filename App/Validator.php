@@ -47,7 +47,7 @@ final class Validator
                         if (empty($rule_arguments)) !$this->$function_name($this->values[$field]);
                         else !$this->$function_name($this->values[$field], $rule_arguments[0]);
                     } catch (Exception $e) {
-                        throw new ValidatorException(message: $e->getMessage(), field: $field);
+                        throw new ValidatorException(message: $e->getMessage());
                     }
                 }
             }
