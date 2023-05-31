@@ -9,9 +9,9 @@ final class RouteLoader
 {
     private static array $routes = [];
 
-    public static function loadRoute(): never
+    public static function loadRoute(): void
     {
-        $route_name = $_SERVER["PATH_INFO"];
+        $route_name = $_SERVER["PATH_INFO"] ?? "/";
         $req_method = $_SERVER['REQUEST_METHOD'];
 
         if (!array_key_exists($route_name, self::$routes)) {
@@ -29,7 +29,8 @@ final class RouteLoader
             $route['class']->newInstance()
         );
 
-        die();
+        // Limpa mochila da sessão para não deixar resíduos
+        SessionBag::clearBag();
     }
 
     // Registra uma acao na rota [GET, POST, UPDATE, etc...]

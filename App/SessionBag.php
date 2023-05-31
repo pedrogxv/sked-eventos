@@ -22,4 +22,8 @@ final class SessionBag
 
         session_write_close();
     }
+    public static function clearBag(): void
+    {
+        session_unset();
+    }
 }

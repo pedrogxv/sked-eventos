@@ -18,6 +18,9 @@ final class View
             'cache' => 'cache',
             'auto_reload' => true,
         ]);
+
+        // Adicionando a variável de sessão ao escopo global do Twig
+        $this->twig->addGlobal('session', $_SESSION);
     }
 
     // renderiza o arquivo solicitado

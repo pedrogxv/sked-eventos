@@ -6,7 +6,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 flex items-center justify-center my-6">
-    <div class="container">
+
+    {% include '/layouts/mensagens.html' %}
+
+    <div class="container mx-2">
       {% block body %}
 
       {% endblock %}
