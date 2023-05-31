@@ -42,13 +42,9 @@ final class Validator
                     $rule_arguments = explode(":", $rule);
                     array_shift($rule_arguments);
 
-                    try {
-                        // Caso a regra não tenha argumentos (como o 20 neste exemplo: "min:20")
-                        if (empty($rule_arguments)) !$this->$function_name($this->values[$field]);
-                        else !$this->$function_name($this->values[$field], $rule_arguments[0]);
-                    } catch (Exception $e) {
-                        throw new ValidatorException(message: $e->getMessage());
-                    }
+                    // Caso a regra não tenha argumentos (como o 20 neste exemplo: "min:20")
+                    if (empty($rule_arguments)) !$this->$function_name($this->values[$field]);
+                    else !$this->$function_name($this->values[$field], $rule_arguments[0]);
                 }
             }
         }
