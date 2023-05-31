@@ -33,8 +33,8 @@ final class RouteLoader
         SessionBag::clearBag();
     }
 
-    // Registra uma acao na rota [GET, POST, UPDATE, etc...]
-    public static function registerSingleAction(string $action, string $route, object $controller, string $functionName): void
+    /** Registra uma acao na rota [GET, POST, UPDATE, etc...] */
+    public static function registerAction(string $action, string $route, object $controller, string $functionName): void
     {
         if (!isset(self::$routes[$route])) self::$routes[$route] = ["class" => new ReflectionClass($controller)];
 
@@ -45,7 +45,7 @@ final class RouteLoader
         ];
     }
 
-    // Registrando todos os métodos de um controller automaticamente
+    /** Registrando todos os métodos de um controller automaticamente */
     public static function register(string $route, Controller $controller): void
     {
         $class = new ReflectionClass($controller);
@@ -53,7 +53,7 @@ final class RouteLoader
 
         // Registrando cada funcao do controller em seu respectivo metodo (GET, POST, DELETE, etc)
         foreach ($functions as $function) {
-            self::registerSingleAction(
+            self::registerAction(
                 action: $function->getName(),
                 route: $route,
                 controller: $controller,

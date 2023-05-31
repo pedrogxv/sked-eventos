@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+<div class="mb-3" style="width: fit-content">
+    <a href="/eventos"
+       class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd"
+                  d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z"
+                  clip-rule="evenodd"/>
+        </svg>
+        Voltar
+    </a>
+</div>
+
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 w-full">
+    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+        Novo Evento
+    </span>
+
+    <form action="/eventos/unique?id={{evento.id}}" method="post">
+        <div class="flex flex-wrap mt-4">
+            <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+                <label class="block dark:text-white text-gray-700 text-sm font-bold mb-2" for="titulo">Título:</label>
+                <input class="shadow dark:bg-slate-200 appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       type="text" id="titulo" value="{{ evento.titulo }}" name="titulo" required>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+                <label class="block dark:text-white text-gray-700 text-sm font-bold mb-2"
+                       for="descricao">Descrição:</label>
+                <input class="shadow appearance-none dark:bg-slate-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       type="text" id="descricao" value="{{ evento.descricao ?? '' }}" name="descricao">
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+                <label class="block dark:text-white text-gray-700 text-sm font-bold mb-2" for="inicio">Início do
+                    Evento:</label>
+                <input class="shadow appearance-none dark:bg-slate-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       type="datetime-local" id="inicio" value="{{ evento.inicio }}" name="inicio"
+                       required>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+                <label class="block dark:text-white text-gray-700 text-sm font-bold mb-2" for="termino">Término do
+                    Evento:</label>
+                <input class="shadow appearance-none dark:bg-slate-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       type="datetime-local" id="termino" value="{{ evento.termino }}" name="termino"
+                       required>
+            </div>
+
+        </div>
+
+        <div class="ms-auto right-0" style="width: fit-content">
+            <button class="px-4 py-2 font-semibold text-sm bg-yellow-700 text-white rounded-full shadow-sm">
+                Atualizar Evento
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -21,7 +21,7 @@ abstract class Model
     /** Retorna todos os registros do Modelo (Model). */
     public function all(): array
     {
-        $query = "SELECT * FROM $this->name WHERE deleted_at IS NULL";
+        $query = "SELECT * FROM $this->name WHERE deleted_at IS NULL ORDER BY inicio";
 
         $con = PDOConnector::getConnector()->prepare($query);
         $con->execute();
@@ -30,9 +30,9 @@ abstract class Model
     }
 
     /** Retorna um registro baseado na cláusula where passada no parâmetro */
-    public function getWhere(string $whereClause): array
+    public function getWhereId(int $id): array
     {
-        $query = "SELECT * FROM $this->name WHERE $whereClause AND deleted_at IS NULL";
+        $query = "SELECT * FROM $this->name WHERE id = $id AND deleted_at IS NULL";
 
         $con = PDOConnector::getConnector()->prepare($query);
         $con->execute();
@@ -63,7 +63,6 @@ abstract class Model
         $values = rtrim($values, ", ");
 
         $query = "INSERT INTO $this->name ($fields) VALUES ($values);";
-        var_dump($query);
 
         $con = PDOConnector::getConnector()->prepare($query);
 
@@ -81,6 +80,21 @@ abstract class Model
 
         return $statement->execute();
     }
+
+    public function update(array $newData, int $id): bool
+    {
+        // Validando dados.
+        (new Validator($this->rules, $newData))
+            ->validate();
+
+        $sql = "UPDATE $this->name SET ";
+
+        foreach ($newData as $column => $value) {
+            $sql .= "$column = \"$value\",";
+        }
+
+        $sql = rtrim($sql, ", ");
+        $sql .= " WHERE id = $id;";
 
         $statement = PDOConnector::getConnector()
             ->prepare($sql);
