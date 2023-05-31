@@ -21,7 +21,7 @@ abstract class Model
     /** Retorna todos os registros do Modelo (Model). */
     public function all(): array
     {
-        $query = "SELECT * FROM $this->name";
+        $query = "SELECT * FROM $this->name WHERE deleted_at IS NULL";
 
         $con = PDOConnector::getConnector()->prepare($query);
         $con->execute();
@@ -32,7 +32,7 @@ abstract class Model
     /** Retorna um registro baseado na cláusula where passada no parâmetro */
     public function getWhere(string $whereClause): array
     {
-        $query = "SELECT * FROM $this->name WHERE $whereClause";
+        $query = "SELECT * FROM $this->name WHERE $whereClause AND deleted_at IS NULL";
 
         $con = PDOConnector::getConnector()->prepare($query);
         $con->execute();
@@ -74,10 +74,17 @@ abstract class Model
         return $con->execute();
     }
 
-    /** Deleta um registro do banco de dados */
+    /** Deleta (soft delete) um registro do banco de dados */
     public function delete(int $id): bool
     {
-        $sql = "DELETE FROM $this->name WHERE id = $id";
+        // SOFT DELETE
+        $sql = "UPDATE $this->name  SET deleted_at = now()  WHERE id = $id";
+
+        $statement = PDOConnector::getConnector()
+            ->prepare($sql);
+
+        return $statement->execute();
+    }
 
         $statement = PDOConnector::getConnector()
             ->prepare($sql);
